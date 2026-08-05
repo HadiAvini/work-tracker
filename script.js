@@ -4,6 +4,15 @@ let records = JSON.parse(
     localStorage.getItem("workRecords_" + currentUser)
 ) || [];
 
+const SUPABASE_URL = "https://mzfvwnsalpihnzpgdeme.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_ANW9PTwJVlWUgtItM_EuHg_tMpObjY8";
+
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
 const tbody = document.getElementById("tbody");
 
 const dateInput = document.getElementById("date");
@@ -19,7 +28,7 @@ const averageText = document.getElementById("average");
 
 
 // افزودن روز کاری
-document.getElementById("addBtn").onclick = function(){
+document.getElementById("addBtn").onclick = async function(){
 
     let date = dateInput.value;
     let start = startInput.value;
@@ -55,11 +64,13 @@ document.getElementById("addBtn").onclick = function(){
     };
 
 
-    records.push(record);
+   records.push(record);
 
-    save();
+save();
 
-    render();
+await saveToSupabase(record);
+
+render();
 
 
     dateInput.value="";
@@ -116,7 +127,28 @@ function formatTime(minutes){
 
 }
 
+async function saveToSupabase(record){
 
+    const { error } = await supabaseClient
+    .from("work_records")
+    .insert([
+        {
+    user: currentUser,
+    user_name: currentUser,
+    date: record.date,
+    start: record.start,
+    end: record.end,
+    minutes: record.minutes
+}
+    ]);
+
+
+    if(error){
+        console.log(error);
+        alert("خطا در ذخیره آنلاین");
+    }
+
+}
 
 // ذخیره اطلاعات
 function save(){
@@ -261,9 +293,43 @@ rateInput.oninput=function(){
 
 };
 
+async function loadFromSupabase(){
+
+    const { data, error } = await supabaseClient
+    .from("work_records")
+    .select("*")
+    .eq("user_name", currentUser);
+
+
+    if(error){
+        console.log(error);
+        return;
+    }
+
+
+    records = data.map(item => ({
+
+        id: item.id,
+
+        date: item.date,
+
+        start: item.start,
+
+        end: item.end,
+
+        minutes: item.minutes
+
+    }));
+
+
+    save();
+
+    render();
+
+}
 
 // اجرای اولیه
-render();
+loadFromSupabase();
 // حالت تیره و روشن
 
 const themeBtn = document.getElementById("themeBtn");
