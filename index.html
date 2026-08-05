@@ -1,0 +1,188 @@
+```html
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سیستم ثبت ساعات کاری</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- فونت فارسی -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- آیکون -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1><i class="fa-solid fa-business-time"></i> سیستم ثبت ساعات کاری</h1>
+
+        <div class="top-buttons">
+            <button id="themeBtn">
+                🌙 حالت تیره
+            </button>
+
+            <button id="clearBtn">
+                🗑 پاک کردن همه
+            </button>
+        </div>
+    </header>
+
+    <section class="settings">
+
+        <label>
+            حقوق هر ساعت (تومان)
+        </label>
+
+        <input
+            type="number"
+            id="hourRate"
+            value="49070"
+        >
+
+    </section>
+
+    <section class="add">
+
+        <h2>ثبت روز کاری</h2>
+
+        <div class="grid">
+
+            <div>
+                <label>تاریخ</label>
+                <input type="text" id="date" placeholder="مثلاً 1405/05/14">
+            </div>
+
+            <div>
+                <label>ورود</label>
+                <input type="time" id="start">
+            </div>
+
+            <div>
+                <label>خروج</label>
+                <input type="time" id="end">
+            </div>
+
+        </div>
+
+        <button id="addBtn">
+            ➕ افزودن
+        </button>
+
+    </section>
+
+    <section class="search">
+
+        <input
+            type="text"
+            id="search"
+            placeholder="جستجو..."
+        >
+
+    </section>
+
+    <section>
+
+        <table>
+
+            <thead>
+
+            <tr>
+
+                <th>تاریخ</th>
+
+                <th>ورود</th>
+
+                <th>خروج</th>
+
+                <th>مدت</th>
+
+                <th>حقوق</th>
+
+                <th>عملیات</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody id="tbody">
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+    <section class="summary">
+
+        <div class="card">
+
+            <h3>تعداد روز</h3>
+
+            <span id="days">
+                0
+            </span>
+
+        </div>
+
+        <div class="card">
+
+            <h3>کل ساعات</h3>
+
+            <span id="hours">
+                0
+            </span>
+
+        </div>
+
+        <div class="card">
+
+            <h3>درآمد کل</h3>
+
+            <span id="income">
+                0 تومان
+            </span>
+
+        </div>
+
+        <div class="card">
+
+            <h3>میانگین روزانه</h3>
+
+            <span id="average">
+                0
+            </span>
+
+        </div>
+
+    </section>
+
+    <section class="export">
+
+        <button id="excelBtn">
+            📄 خروجی Excel
+        </button>
+
+        <button id="pdfBtn">
+            📕 خروجی PDF
+        </button>
+
+        <button id="printBtn">
+            🖨 چاپ
+        </button>
+
+    </section>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf-font@1.0.0/dist/jspdf-font.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
+```
