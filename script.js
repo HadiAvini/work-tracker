@@ -1,4 +1,8 @@
-let records = JSON.parse(localStorage.getItem("workRecords")) || [];
+let currentUser = localStorage.getItem("currentUser") || "محمدهادی";
+
+let records = JSON.parse(
+    localStorage.getItem("workRecords_" + currentUser)
+) || [];
 
 const tbody = document.getElementById("tbody");
 
@@ -118,7 +122,7 @@ function formatTime(minutes){
 function save(){
 
     localStorage.setItem(
-        "workRecords",
+        "workRecords_" + currentUser,
         JSON.stringify(records)
     );
 
@@ -453,3 +457,24 @@ document.getElementById("pdfBtn").onclick = function(){
 
 };
  
+function changeUser(user){
+
+    currentUser = user;
+
+    localStorage.setItem(
+        "currentUser",
+        user
+    );
+
+    records = JSON.parse(
+        localStorage.getItem("workRecords_" + user)
+    ) || [];
+
+
+    document.getElementById("currentUser").innerText =
+    "کاربر: " + user;
+
+
+    render();
+
+}
