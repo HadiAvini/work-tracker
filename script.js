@@ -217,7 +217,20 @@ function render(){
 
 
 // حذف رکورد
-function removeRecord(id){
+async function removeRecord(id){
+
+    const { error } = await supabaseClient
+    .from("work_records")
+    .delete()
+    .eq("id", id);
+
+
+    if(error){
+        console.log(error);
+        alert("خطا در حذف آنلاین");
+        return;
+    }
+
 
     records =
     records.filter(
