@@ -13,6 +13,8 @@ const supabaseClient = supabase.createClient(
     SUPABASE_KEY
 );
 
+
+
 const tbody = document.getElementById("tbody");
 
 const dateInput = document.getElementById("date");
@@ -341,8 +343,6 @@ async function loadFromSupabase(){
 
 }
 
-// اجرای اولیه
-loadFromSupabase();
 // حالت تیره و روشن
 
 const themeBtn = document.getElementById("themeBtn");
@@ -557,3 +557,4 @@ function changeUser(user){
     render();
 
 }
+

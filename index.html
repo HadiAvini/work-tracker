@@ -1,203 +1,371 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سیستم ثبت ساعات کاری</title>
 
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- فونت فارسی -->
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+<title>سیستم ثبت ساعات کاری</title>
 
-    <!-- آیکون -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="icon" type="image/png" href="Favicon2.png">
+
+<link rel="stylesheet" href="style.css">
+
+<!-- فونت فارسی -->
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<!-- آیکون -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 </head>
+
+
 <body>
+
 
 <div class="container">
 
-    <header>
-        <h1><i class="fa-solid fa-business-time"></i> سیستم ثبت ساعات کاری</h1>
+<!-- برنامه اصلی -->
 
-        <div class="top-buttons">
-            <button id="themeBtn">
-                🌙 حالت تیره
-            </button>
+<div id="app">
 
-            <button id="clearBtn">
-                🗑 پاک کردن همه
-            </button>
-        </div>
-    </header>
 
-    <section class="settings">
 
-        <label>
-            حقوق هر ساعت (تومان)
-        </label>
+<header>
 
-        <input
-            type="number"
-            id="hourRate"
-            value="49070"
-        >
+<h1>
+<i class="fa-solid fa-business-time"></i>
+سیستم ثبت ساعات کاری
+</h1>
 
-    </section>
 
-    <section class="add">
+<div class="top-buttons">
 
-        <h2>ثبت روز کاری</h2>
 
-        <div class="grid">
+<button id="themeBtn">
+🌙 حالت تیره
+</button>
 
-            <div>
-                <label>تاریخ</label>
-                <input type="text" id="date" placeholder="مثلاً 1405/05/14">
-            </div>
 
-            <div>
-                <label>ورود</label>
-                <input type="time" id="start">
-            </div>
+<button id="clearBtn">
+🗑 پاک کردن همه
+</button>
 
-            <div>
-                <label>خروج</label>
-                <input type="time" id="end">
-            </div>
 
-        </div>
+</div>
 
-        <button id="addBtn">
-            ➕ افزودن
-        </button>
 
-    </section>
+</header>
 
-    <section class="search">
 
-        <input
-            type="text"
-            id="search"
-            placeholder="جستجو..."
-        >
 
-    </section>
 
-    <section>
+<section class="settings">
 
-        <table>
 
-            <thead>
+<label>
+حقوق هر ساعت (تومان)
+</label>
 
-            <tr>
 
-                <th>تاریخ</th>
+<input
+type="number"
+id="hourRate"
+value="49070"
+>
 
-                <th>ورود</th>
 
-                <th>خروج</th>
+</section>
 
-                <th>مدت</th>
 
-                <th>حقوق</th>
 
-                <th>عملیات</th>
 
-            </tr>
 
-            </thead>
+<section class="add">
 
-            <tbody id="tbody">
 
-            </tbody>
+<h2>
+ثبت روز کاری
+</h2>
 
-        </table>
 
-    </section>
+<div class="grid">
 
-    <section class="summary">
 
-        <div class="card">
+<div>
 
-            <h3>تعداد روز</h3>
+<label>
+تاریخ
+</label>
 
-            <span id="days">
-                0
-            </span>
+<input 
+type="text"
+id="date"
+placeholder="مثلاً 1405/05/14"
+>
 
-        </div>
+</div>
 
-        <div class="card">
 
-            <h3>کل ساعات</h3>
 
-            <span id="hours">
-                0
-            </span>
+<div>
 
-        </div>
+<label>
+ورود
+</label>
 
-        <div class="card">
+<input 
+type="time"
+id="start"
+>
 
-            <h3>درآمد کل</h3>
+</div>
 
-            <span id="income">
-                0 تومان
-            </span>
 
-        </div>
 
-        <div class="card">
 
-            <h3>میانگین روزانه</h3>
+<div>
 
-            <span id="average">
-                0
-            </span>
+<label>
+خروج
+</label>
 
-        </div>
+<input 
+type="time"
+id="end"
+>
 
-    </section>
+</div>
 
-    <section class="export">
 
-        <button id="excelBtn">
-            📄 خروجی Excel
-        </button>
+</div>
 
-        <button id="pdfBtn">
-            📕 خروجی PDF
-        </button>
 
-        <button id="printBtn">
-            🖨 چاپ
-        </button>
 
-    </section>
+<button id="addBtn">
+➕ افزودن
+</button>
 
-<h3 style="text-align:center;">انتخاب کاربر</h3>
+
+</section>
+
+
+
+
+
+<section class="search">
+
+
+<input
+type="text"
+id="search"
+placeholder="جستجو..."
+>
+
+
+</section>
+
+
+
+
+
+<section>
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>
+تاریخ
+</th>
+
+
+<th>
+ورود
+</th>
+
+
+<th>
+خروج
+</th>
+
+
+<th>
+مدت
+</th>
+
+
+<th>
+حقوق
+</th>
+
+
+<th>
+عملیات
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+<tbody id="tbody">
+
+
+</tbody>
+
+
+</table>
+
+
+</section>
+
+
+
+
+
+<section class="summary">
+
+
+<div class="card">
+
+<h3>
+تعداد روز
+</h3>
+
+<span id="days">
+0
+</span>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+کل ساعات
+</h3>
+
+<span id="hours">
+0
+</span>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+درآمد کل
+</h3>
+
+<span id="income">
+0 تومان
+</span>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+میانگین روزانه
+</h3>
+
+<span id="average">
+0
+</span>
+
+</div>
+
+
+</section>
+
+
+
+
+
+<section class="export">
+
+
+<button id="excelBtn">
+📄 خروجی Excel
+</button>
+
+
+<button id="pdfBtn">
+📕 خروجی PDF
+</button>
+
+
+<button id="printBtn">
+🖨 چاپ
+</button>
+
+
+</section>
+
+
+
+
+
+
+<h3 style="text-align:center;">
+انتخاب کاربر
+</h3>
+
+
 
 <div style="text-align:center;">
+
 
 <button onclick="changeUser('محمدهادی')">
 محمدهادی
 </button>
 
+
+
 <button onclick="changeUser('عمه فاطمه')">
 عمه فاطمه
 </button>
 
+
+
 <p id="currentUser"></p>
 
+
+
 </div>
+
+
+
+</div>
+<!-- پایان app -->
+
+
+
+</div>
+<!-- پایان container -->
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="script.js"></script>
 
-</body>
-</html>
 
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+</body>
+
+</html>
