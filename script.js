@@ -78,14 +78,57 @@ save();
 
 await saveToSupabase(record);
 
-render();
+async function syncLocalRecordsToSupabase(){
 
+    if(records.length === 0){
+        console.log("رکورد محلی برای انتقال وجود ندارد");
+        return;
+    }
 
-    dateInput.value="";
-    startInput.value="";
-    endInput.value="";
+    const { data: existingRecords, error: checkError } =
+        await supabaseClient
+        .from("work_records")
+        .select("date,start,end,user_name")
+        .eq("user_name", currentUser);
 
-};
+    if(checkError){
+        console.log("خطا در بررسی رکوردها:", checkError);
+        return;
+    }
+
+    for(const record of records){
+
+        const exists = existingRecords.some(item =>
+            item.date === record.date &&
+            item.start === record.start &&
+            item.end === record.end &&
+            item.user_name === currentUser
+        );
+
+        if(exists){
+            continue;
+        }
+
+        const { error } = await supabaseClient
+            .from("work_records")
+            .insert([
+                {
+                    user: currentUser,
+                    user_name: currentUser,
+                    date: record.date,
+                    start: record.start,
+                    end: record.end,
+                    minutes: record.minutes
+                }
+            ]);
+
+        if(error){
+            console.log("خطا در انتقال رکورد:", error);
+        }
+    }
+
+    console.log("رکوردهای قدیمی بررسی و همگام شدند ✅");
+}
 
 
 
@@ -566,6 +609,9 @@ rateInput.value = defaultRates[user];
 }
 
 // دریافت اطلاعات از Supabase هنگام باز شدن برنامه
-loadFromSupabase();
 
-console.log("اطلاعات از Supabase بارگذاری شد");
+syncLocalRecordsToSupabase().then(() => {
+
+    loadFromSupabase();
+
+});
