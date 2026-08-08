@@ -23,6 +23,12 @@ const endInput = document.getElementById("end");
 
 const rateInput = document.getElementById("hourRate");
 
+const defaultRates = {
+    "محمدهادی": 49070,
+    "عمه فاطمه": 142045
+};
+rateInput.value = defaultRates[currentUser];
+
 const daysText = document.getElementById("days");
 const hoursText = document.getElementById("hours");
 const incomeText = document.getElementById("income");
@@ -553,6 +559,7 @@ function changeUser(user){
     document.getElementById("currentUser").innerText =
     "کاربر: " + user;
 
+rateInput.value = defaultRates[user];
 
     render();
 
