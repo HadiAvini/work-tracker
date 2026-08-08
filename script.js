@@ -558,3 +558,7 @@ function changeUser(user){
 
 }
 
+// دریافت اطلاعات از Supabase هنگام باز شدن برنامه
+loadFromSupabase();
+
+console.log("اطلاعات از Supabase بارگذاری شد");
