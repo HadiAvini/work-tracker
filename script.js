@@ -270,32 +270,29 @@ function render(){
 // حذف رکورد
 async function removeRecord(id){
 
+    // حذف از Supabase
     const { error } = await supabaseClient
-    .from("work_records")
-    .delete()
-    .eq("id", id);
-
+        .from("work_records")
+        .delete()
+        .eq("id", id)
+        .eq("user_name", currentUser);
 
     if(error){
-        console.log(error);
-        alert("خطا در حذف آنلاین");
+        console.log("خطا در حذف:", error);
+        alert("خطا در حذف آنلاین ❌");
         return;
     }
 
+    // حذف از اطلاعات همین کاربر
+    records = records.filter(item => item.id !== id);
 
-    records =
-    records.filter(
-        item=>item.id!==id
-    );
-
-
+    // ذخیره محلی
     save();
 
+    // نمایش دوباره جدول
     render();
 
 }
-
-
 
 // بروزرسانی اطلاعات کلی
 function updateSummary(){
@@ -360,16 +357,14 @@ rateInput.oninput=function(){
 async function loadFromSupabase(){
 
     const { data, error } = await supabaseClient
-    .from("work_records")
-    .select("*")
-    .eq("user_name", currentUser);
-
+        .from("work_records")
+        .select("*")
+        .eq("user_name", currentUser);
 
     if(error){
-        console.log(error);
+        console.log("خطا در دریافت اطلاعات:", error);
         return;
     }
-
 
     records = data.map(item => ({
 
@@ -385,11 +380,13 @@ async function loadFromSupabase(){
 
     }));
 
-
     save();
 
     render();
 
+    console.log(
+        "اطلاعات " + currentUser + " از Supabase دریافت شد ✅"
+    );
 }
 
 // حالت تیره و روشن
@@ -610,8 +607,4 @@ rateInput.value = defaultRates[user];
 
 // دریافت اطلاعات از Supabase هنگام باز شدن برنامه
 
-syncLocalRecordsToSupabase().then(() => {
-
-    loadFromSupabase();
-
-});
+loadFromSupabase();
